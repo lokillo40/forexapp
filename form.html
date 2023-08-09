@@ -1,0 +1,12 @@
+<form method="POST">
+    {% for field in fields %}
+    <div>
+        <label for="{{ field.id }}">{{ field.label }}:</label>
+        <input type="text" id="{{ field.id }}" name="{{ field.id }}" placeholder="{{ field.placeholder }}" required>
+    </div>
+    {% endfor %}
+    <div>
+        <input type="submit" value="Convert">
+    </div>
+</form>
+

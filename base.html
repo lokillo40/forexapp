@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Currency Converter</h1>
+    </header>
+
+    {% block content %}
+        {% include 'form.html' %}
+        {% include 'results.html' %}
+    {% endblock %}
+
+    <footer>
+        <p>&copy; 2023 Currency Converter</p>
+    </footer>
+</body>
+</html>
