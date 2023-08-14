@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from forex_python.converter import CurrencyRates, CurrencyCodes
+from converter import convert_currency
 
 app = Flask(__name__)
 cr = CurrencyRates()
@@ -26,17 +27,12 @@ def index():
         to_currency = request.form.get('to_currency')
         amount = request.form.get('amount')
 
-        # Validate the currency codes and the amount
         if not cc.get_symbol(from_currency) or not cc.get_symbol(to_currency):
             error = 'Invalid currency code. Please enter a valid three letter currency code (eg, USD, EUR, JPY).'
         elif not amount.replace('.', '', 1).isdigit():
             error = 'Invalid amount. Please enter a valid number.'
         else:
-            # Perform the conversion
-            converted = cr.convert(from_currency, to_currency, float(amount))
-            rounded = round(converted, 2)
-            symbol = cc.get_symbol(to_currency)
-            result = f"{symbol} {rounded}"
+            result = convert_currency(from_currency, to_currency, amount)
 
     # Render the template with the form and the result
     return render_template('base.html', error=error, result=result, fields=fields)
